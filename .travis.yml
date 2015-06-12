@@ -18,3 +18,16 @@ before_script:
   - composer require guzzle/http:${GUZZLE_VERSION} --no-update
 
 script: composer install -n --dev --prefer-source
+
+before_deploy:
+  - make
+
+deploy:
+  provider: releases
+  api_key:
+    secure: Y1Bs8Jmlx9xwHoeQ+XnhXpiFc6fi/JoigiiyuVUsYEg1bOxithkv7tyfILtrZ4YY62BdC41B7ouZqnAanq7fh+MFRY63h/QFpqy9rNBLHoGs701Ea3MOeaLmbwZvAKU9BFx3PxIsXNt+sL3PmSomQP6dYTyo7AOpI1zs9eqxMvGLUFGL/g4LnuO8yjcfwDF21ZBH6Y2nqnYSPPt3j28E0cVPQvBz9jYrtzldF9Nhwi0uBSH+cEFmS5P5SqqH03TkDYYduaPSEv4WT23uKD9tRd278nRTo7qIwkjDAceh4mmlbUhKAnR7MhduBT+DUbvSfkn9ePHXIn6GlzaNqhRA4X5IpsGpmIui0C0yaPjLf9phWswMVCJnCOefYh9ML+3HQ6nIWGmd0hHKSAUpuHorqJW9z+bVDxHynVFjtwWEZmSKO+a3OnDWjDmfvAG6inensQjLQvK1DoVwV7KmZW+0k8tWfzJDMy+DKmnRjXDzm8tCuhrqfyURHJPQPxtMXBfVBVDKMgqc8B780TaWo7WJ47Q2AYKpXdDUAGCFQd0E/MAjSqX4nqgqSyku2mJPMpr35E/QGuRNgwioAM+s1SCagQhZsDMTA/lAARBvdlhZrNdygJzI6u47SHjNqmlGbQzO1CZc5Qdg2mjpilGz75IZS0GujjsGa7dHHHfhGBe92Gw=
+  file:
+    - omnipay.phar
+    - omnipay-psr0.zip
+  on:
+    repo: maxnet/omnipay-phar
