@@ -26,7 +26,7 @@ file_put_contents($staging.'/Omnipay/Common/GatewayFactory.php', $d);
 /* Copy Omnipay modules to PSR-0 style folder structure */
 $dh = opendir('vendor/omnipay');
 while ($entry = readdir($dh)) {
-    if ($entry == '.' || $entry == '..' || $entry == 'common')
+    if ($entry == '.' || $entry == '..' || $entry == 'common' || $entry == 'tests')
         continue;
 
     /* Consult composer.json for namespace names */
@@ -34,7 +34,7 @@ while ($entry = readdir($dh)) {
 
     if ($composer_json) {
         $j = json_decode($composer_json);
-        $psr4 = $j->autoload->{'psr-4'};
+        $psr4 = @$j->autoload->{'psr-4'};
         if ($psr4) {
             foreach ($psr4 as $ns => $path) {
                 $packager->recursiveCopy('vendor/omnipay/'.$entry.'/'.$path,
@@ -42,7 +42,7 @@ while ($entry = readdir($dh)) {
             }
         }
         else {
-            die("Error processing '$entry', no psr-4 autoload entry in composer.json");
+            die("Error processing '$entry', no psr-4 autoload entry in composer.json\n");
         }
     }
 }
