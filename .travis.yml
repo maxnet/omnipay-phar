@@ -6,9 +6,6 @@ php:
   - 5.5
 
 env:
-  - SYMFONY_VERSION="2.1" GUZZLE_VERSION="3.1"
-  - SYMFONY_VERSION="2.*" GUZZLE_VERSION="3.1"
-  - SYMFONY_VERSION="2.1" GUZZLE_VERSION="3.*"
   - SYMFONY_VERSION="2.*" GUZZLE_VERSION="3.*"
 
 before_script:
@@ -31,3 +28,5 @@ deploy:
     - omnipay-psr0.zip
   on:
     repo: maxnet/omnipay-phar
+    php: 5.5
+    tags: true

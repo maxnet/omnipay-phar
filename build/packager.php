@@ -14,7 +14,7 @@ $output  = getcwd();
 $packager = new Burgomaster($staging, $root);
 
 /* Copy Omnipay Common to staging */
-$packager->recursiveCopy('vendor/omnipay/common/src/Omnipay', 'Omnipay', ['php']);
+$packager->recursiveCopy('vendor/omnipay/common/src/Omnipay', 'Omnipay', array('php'));
 
 /* GatewayFactory::getSupportedGateways() uses information from composer.json
    Copy that file as gatewayinfo.json and fix-up hard coded path - pending a better solution */
@@ -38,7 +38,7 @@ while ($entry = readdir($dh)) {
         if ($psr4) {
             foreach ($psr4 as $ns => $path) {
                 $packager->recursiveCopy('vendor/omnipay/'.$entry.'/'.$path,
-                                         str_replace("\\", "/", $ns), ['php']);
+                                         str_replace("\\", "/", $ns), array('php'));
             }
         }
         else {
@@ -55,9 +55,9 @@ if ($includeGuzzle) {
 
 if ($includeSymfony) {
     $packager->recursiveCopy('vendor/symfony/http-foundation',
-                             'Symfony/Component/HttpFoundation', ['php']);
+                             'Symfony/Component/HttpFoundation', array('php'));
     $packager->recursiveCopy('vendor/symfony/event-dispatcher',
-                             'Symfony/Component/EventDispatcher', ['php']);
+                             'Symfony/Component/EventDispatcher', array('php'));
 }
 
 $packager->createAutoloader();
